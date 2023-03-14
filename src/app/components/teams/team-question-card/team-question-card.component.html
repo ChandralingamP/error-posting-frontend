@@ -1,0 +1,20 @@
+
+<div *ngIf="question" class="flex mx-3 flex-col lg:flex-row rounded-md border hover:shadow-lg p-2 lf:p-4">
+  <div class="lg:w-40 w-full text-sm lg:text-md lg:text-lg flex flex-row lg:flex-col justify-start items-end pl-1 lg:px-5">
+    <p class="lg:mr-0 mr-3">{{question.votes.length}} Votes </p>
+    <p *ngIf="question.answers">{{question.answers.length}} answers</p>
+  </div>
+  <div class="flex flex-col w-full lg:mb-8">
+    <p (click)="navTo('answers/'+question._id)" class="lg:text-xl pl-1  text-md cursor-pointer font-semibold mb-1"> {{question.title}}</p>
+    <div class="flex w-full items-center flex-col lg:flex-row justify-between">
+      <div class="w-full flex-wrap flex">
+        <div *ngFor="let tag of question.tags">
+          <app-tag [tag]="tag"></app-tag>
+        </div>
+      </div>
+      <div class="flex w-full lg:w-1/5 flex-row lg:flex-col">
+        <p *ngIf="question.userName" class="cursor-pointer mr-1 text-sm lg:text-md" (click)="navTo('dashboard/'+question.userName)">{{question.userName}}</p>
+      </div>
+    </div>
+  </div>
+</div>

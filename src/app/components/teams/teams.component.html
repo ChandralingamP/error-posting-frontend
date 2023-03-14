@@ -1,0 +1,23 @@
+<div class="relative pt-14 bg-aliceblue min-h-screen">
+  <div class="w-full" *ngIf="teamService.teamId">
+    <div>
+      <app-team-members ></app-team-members>
+    </div>
+    <div class="bg-blue-600" *ngIf="teamService.addMemberToggle">
+      <app-team-add-members></app-team-add-members>
+    </div>
+    <div class="relative lg:pl-56 w-full">
+      <div class="p-3 lg:p-4">
+        <app-filter></app-filter>
+      </div>
+      <div *ngIf="teamService.questions" class="lg:pt-2">
+        <div *ngFor="let question of teamService.questions" class="mt-2">
+          <app-team-question-card [question]="question"></app-team-question-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!teamService.teamId">
+    <p>Loading...</p>
+  </div>
+</div>

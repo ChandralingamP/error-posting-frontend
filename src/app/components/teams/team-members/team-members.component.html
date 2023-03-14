@@ -1,0 +1,14 @@
+<div  class="fixed lg:block pt-4 lg:w-56 min-h-screen {{storage.toggleTeamMenu}} z-20 bg-blue-500">
+  <p (click)="navto('home')" class="p-4 cursor-pointer pt-1 text-lg font-bold text-aliceblue">Back to Home</p>
+  <div class="w-full" *ngIf="service.members">
+    <div class="flex flex-row ">
+      <h1 class="p-4 pt-1 text-xl font-bold text-aliceblue">Members</h1>
+      <!-- <button (click)="copied()" cdkCopyToClipboard="{{inviteLink}}" class="p-3 pt-1"><span class="px-2 font-bold  py-1 bg-blue-300">Invite +</span></button> -->
+      <button (click)="toggleAddMembers()" class="ml-4 p-3 pt-1"><span class="px-2 font-bold rounded-sm py-1 bg-blue-300">Add +</span></button>
+    </div>
+    <button (click)="navto(member._id)" class="p-2 my-2 rounded-sm w-52 flex flex-row justify-start items-center mx-2 bg-blue-300" *ngFor="let member of service.members">
+      <img  class="h-10 w-10" src={{member.photoURL}} alt="">
+      <p class="pl-2 font-medium">{{member.userName}}</p>
+    </button>
+  </div>
+</div>

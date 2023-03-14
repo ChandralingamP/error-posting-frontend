@@ -1,0 +1,19 @@
+<div class="flex pt-14 w-full">
+  <div class="relative">
+    <app-navbar></app-navbar>
+  </div>
+    <div class="min-h-screen w-full bg-blue-100 lg:left-56 lg:right-0 flex flex-col p-4">
+      <div class="w-full flex flex-col mx-auto mt-14 lg:p-5">
+        <h1 class="lg:text-2xl text-xl self-center font-bold">Get started</h1>
+        <p class="self-center text-md">Collaborate, connect, and grow your team's wisdom</p>
+        <div class="bg-blue-400 flex flex-col rounded-md p-4 w-full lg:rounded-2xl mt-12 lg:w-96 lg:mx-auto lg:p-5">
+          <h2 class="text-xl text-aliceblue font-bold lg:mb-5">Create a Team</h2>
+          <div class="flex flex-col lg:px-5" >
+            <label class="text-lg my-2 font-medium" for="teamname">Team Name</label>
+            <input [(ngModel)]="teamName" class=" bg-aliceblue rounded-sm w-full text-lg px-2 outline-none border-0" type="text" placeholder="teamname"/>
+            <button (click)="creatTeam()" class="text-aliceblue text-xl py-1 font-semibold bg-blue-600 rounded-md shadow-md hover:shadow-lg my-5 w-40">create team</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="flex w-full">
+  <div class="relative mt-14">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="lg:absolute lg:left-60 lg:right-4 flex flex-col p-4 mt-14">
+    <div class="w-full bg-blue-100 rounded-lg lg:h-36 p-4 lg:p-5">
+      <div class="flex  flex-row mx-2 my-1 justify-between">
+        <h1 class="lg:text-4xl self-start text-xl font-bold">Top Questions</h1>
+        <button
+          (click)="this.teamService.toggleMenu = false;"
+          routerLink="post-questions"
+          class="bg-blue-600 text-aliceblue lg:rounded-lg rounded-sm px-5 lg:text-xl text-sm font-semibold"
+        >
+          Ask Questions
+        </button>
+      </div>
+      <div class="flex lg:mt-6 mt-2 px-1 flex-col lg:flex-row lg:items-center lg:justify-between">
+        <p class="lg:text-xl text-sm">{{service.questions?.length}} questions</p>
+        <div class="lg:text-lg mt-1 lg:mt-0 text-sm border">
+          <button (click)="getNew()" class="lg:border-2 px-1 border border-r-0 border-black lg:rounded-l-lg lg:px-4">
+            Newest
+          </button>
+          <button (click)="getVotes()" class="lg:border-2 px-1 border border-r-0 border-black lg:px-4">High Votes</button>
+          <button (click)="getViews()" class="lg:border-2 px-1 border border-r-0 border-black lg:px-4">High Views</button>
+          <button (click)="getUnanswered()" class="lg:border-2 px-1 border border-black lg:rounded-r-lg lg:px-4">
+            Unanswered
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="service.questions" >
+      <div *ngFor="let question of service.questions" class="mt-2">
+        <app-card [question]="question"></app-card>
+      </div>
+    </div>
+  </div>
+</div>

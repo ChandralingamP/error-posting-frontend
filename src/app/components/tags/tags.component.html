@@ -1,0 +1,51 @@
+<div class="flex w-full">
+  <div class="relative mt-14">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="absolute lg:left-60 lg:right-4 flex flex-col mt-14">
+    <div class="lg:p-8 p-3">
+      <h1 class="text-2xl mb-1 lg:mb-3 font-bold">Tags</h1>
+      <p class="lg:text-lg text-md lg:w-2/3">
+        A tag is a keyword or label that categorizes your question with other,
+        similar questions. Using the right tags makes it easier for others to
+        find and answer your question.
+      </p>
+      <div
+        class="bg-aliceblue p-1 border border-black mt-4 lg:mt-8 flex rounded-lg px-2 w-full lg:w-96"
+      >
+        <fa-icon class="h-6" icon="magnifying-glass"></fa-icon>
+        <input
+          class="bg-aliceblue w-full ml-1 lg:ml-3 text-md lg:text-lg outline-none"
+          type="text"
+          [(ngModel)]="tagQuery"
+          (keyup)="searchTags()"
+          placeholder="search..."
+        />
+      </div>
+      <div
+        *ngIf="tags"
+        class="grid text-blue-900 my-3 grid-cols-2 lg:grid-cols-3"
+      >
+        <div
+          *ngFor="let tag of tags"
+          class="m-2 lg:h-24 flex flex-col rounded-md border-2 border-blue-200 hover:shadow-lg justify-between px-2 py-1 lg:p-3"
+        >
+          <div>
+            <button
+              (click)="navTo('questions/tagged/' + tag.tag)"
+              routerLink="questions/tagged/tag"
+              class="lg:py-1 px-[6px] lg:px-5  lg:m-1 lg:hover:shadow-lg lg:bg-blue-300 font-semibold rounded-sm lg:rounded-md"
+            >
+              <p class="text-lg">
+                {{ tag.tag }}
+              </p>
+            </button>
+          </div>
+          <div class="flex ml-1 flex-row justify-between">
+            <p>{{ tag.qCount }} questions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div  class="fixed lg:block w-56 z-10 bg-gray-800 scroller h-screen {{storageService.toggleMenu}}">
+  <button
+  (click)="navTo('')"
+    class="mb-2 w-full outline-none text-aliceblue mt-4 hover:bg-blue-500 border-r-4 border-blue-900 py-2 text-center text-xl font-bold"
+  >
+    Home
+  </button>
+  <div class="font-semibold">
+    <h2 class="px-2 text-xl">PUBLIC</h2>
+    <ul class="flex flex-col justify-center items-start">
+      <li
+      (click)="navTo('/questions')"
+        class="outline-none w-56 pl-4 self-start text-aliceblue mt-4 hover:bg-blue-500 border-r-4 border-blue-900 py-2 text-xl font-bold"
+      >
+        <button>
+          <fa-icon
+            class="h-6 w-6 text-blue-900 pr-3"
+            icon="earth-americas"
+          ></fa-icon
+          >Question
+        </button>
+      </li>
+      <li
+      (click)="navTo('/tags')"
+        class="outline-none w-56 pl-4 text-aliceblue mt-4 hover:bg-blue-500 border-r-4 border-blue-900 py-2 text-xl font-bold"
+      >
+        <button>
+          <fa-icon
+            class="h-6 w-6 text-2xl text-blue-900 pr-3"
+            icon="hashtag"
+          ></fa-icon
+          >Tags
+        </button>
+      </li>
+      <li
+        (click)="navTo('/users')"
+        class="outline-none w-56 pl-4 text-aliceblue mt-4 hover:bg-blue-500 border-r-4 border-blue-900 py-2 text-xl font-bold"
+      >
+        <button>
+          <fa-icon class="h-6 w-6 text-blue-900 pr-2" icon="users"></fa-icon
+          >Users
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="font-semibold mt-3 w-full">
+    <h2 class="px-2 text-xl">TEAMS</h2>
+    <div class="w-full" *ngIf="userService.teams?.length">
+      <div
+        class="py-1 px-2 mx-2 my-2 rounded-sm bg-blue-200"
+        *ngFor="let team of userService.teams"
+      >
+        <button (click)="navTo('team/' + team._id)">{{ team.name }}</button>
+      </div>
+    </div>
+    <div class="w-full p-3">
+      <div class="flex h-36 px-2 rounded-md w-full flex-col justify-center">
+        <h1 class="self-center pl-3 text-aliceblue text-md">
+          Start collaborating and sharing organizational knowledge.
+        </h1>
+        <button
+          (click)="navTo('team/create')"
+          class="outline-none rounded-md hover:drop-shadow-lg bg-blue-600 font-medium text-aliceblue py-1 mx-4 mt-4"
+        >
+          Create a Team
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

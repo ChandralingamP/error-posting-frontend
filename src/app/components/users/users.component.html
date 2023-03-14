@@ -1,0 +1,37 @@
+<div class="flex w-full">
+  <div class="relative mt-14">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="absolute lg:left-60 lg:right-4 p-4 flex flex-col py-4 mt-14">
+    <h1 class="text-2xl mb-3 font-bold">Users</h1>
+    <div
+      class="bg-aliceblue p-1 border border-black mt-2 lg:mt-8 flex rounded-md lg:rounded-lg px-2 lg:w-96"
+    >
+      <fa-icon class="h-6" icon="magnifying-glass"></fa-icon>
+      <input
+        (keyup)="searchUser()"
+        [(ngModel)]="nameQuery"
+        class="bg-aliceblue w-full ml-3 text-lg outline-none"
+        type="text"
+        placeholder="search..."
+      />
+    </div>
+    <div class="grid w-full text-blue-900 my-3 gap-2 lg:grid-cols-3">
+      <div
+        *ngFor="let user of users"
+        class="m-2 w-[360px] lg:w-full h-28 flex hover:shadow-lg flex-row rounded-md border-2 border-blue-200 justify-start p-3 "
+      >
+        <div class="w-20 mr-2">
+          <img class="w-20 h-20" src="{{user.photoURL}}" alt="" />
+        </div>
+        <div class="flex flex-col justify-between">
+          <div>
+            <p class="cursor-pointer" (click)="navTo(user._id)">{{ user.userName }}</p>
+            <p *ngIf="user.reputation" title="answers posted">{{user.reputation}}</p>
+            <p *ngIf="!user.reputation" title="answers posted">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

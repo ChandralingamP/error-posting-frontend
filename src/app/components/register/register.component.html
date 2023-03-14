@@ -1,0 +1,65 @@
+
+<div class="flex mt-20 justify-center justify-items-center">
+  <div class="displayTableCell w-96 mt-10">
+    <div class="text-xl w-full">
+      <button
+        type="button"
+        class="text-xl p-1 font-semibold rounded-md text-aliceblue mt-14 bg-blue-500 w-full"
+        (click)="authService.GoogleAuth()"
+      >
+      Continue with Google
+      </button>
+    </div>
+    <div class="authBlock w-full mt-10">
+      <div
+        class="flex w-full flex-col p-10 bg-aliceblue border border-gray-200 rounded-xl"
+      >
+        <label class="font-semibold my-1 text-black text-lg" for="email"
+          >Email</label
+        >
+        <input
+          class="w-full"
+          type="text"
+          class="px-5 text-md py-1 text-gray-600 focus:ring-0"
+          placeholder="email"
+          #email
+          required
+        />
+        <div class="flex mt-3 mb-2 flex-row items-center justify-between">
+          <label class="font-semibold text-black text-lg" for="password"
+            >Password</label
+          >
+          <span class="text-md text-blue-600" routerLink="/forgot-password"
+            >Forgot Password?</span
+          >
+        </div>
+        <input
+          type="password"
+          class="px-5 text-md py-1 text-gray-600 focus:ring-0"
+          placeholder="Password"
+          #userPassword
+          required
+        />
+        <button
+          class="outline-none mt-5 self-center bg-blue-500 text-xl font-bold w-28 text-amber-50 p-1 rounded-sm self-c"
+          value="Log in"
+          (click)="authService.SignUp(email.value, userPassword.value)"
+        >
+        Sign Up
+        </button>
+      </div>
+      <div class="formGroup"></div>
+      <div class="forgotPassword"></div>
+    </div>
+    <div class="mt-14 text-md flex justify-center">
+      <span
+        >Already have an account?<span
+          class="text-blue-600 text-md"
+          routerLink="/sign-in"
+        >
+        Log In</span
+        ></span
+      >
+    </div>
+  </div>
+</div>

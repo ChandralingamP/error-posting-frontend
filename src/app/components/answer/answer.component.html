@@ -1,0 +1,131 @@
+<div class="flex w-full">
+  <div class="relative mt-14">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="absolute w-full lg:w-3/5 lg:left-56">
+    <div *ngIf="question" class="mt-16 w-full lg:p-4">
+      <div
+        class="w-full justify-items-center lg:flex-row flex-col-reverse flex lg:border lg:border-b-blue-600 shadow-sm lg:shadow-xl border-r-blue-600 lg:rounded-lg p-4"
+      >
+        <div class="flex lg:w-4/5 flex-col mt-1 justify-start">
+          <h1 class="lg:text-3xl text-lg font-semibold">
+            {{ question.title }}
+          </h1>
+          <p class="lg:py-2 py-1 text-sm lg:text-lg">
+            <!-- Asked time -->
+            <span class="text-sm lg:text-lg"
+              >Viewed {{ question.views }} times</span
+            >
+          </p>
+        </div>
+        <div class="flex flex-col justify-end lg:justify-start">
+          <button
+            (click)="navTo('/post-questions')"
+            class="bg-blue-600 self-end py-1 w-36  text-aliceblue lg:h-12 rounded-sm lg:rounded-lg lg:px-3 lg:my-3 lg:text-lg text-md font-semibold"
+          >
+            Ask Questions
+          </button>
+        </div>
+      </div>
+      <div class="px-2 w-full flex flex-row">
+        <div
+          class="w-full border lg:mt-5 lg:py-3 shadow-md rounded-sm lg:border-b-gray-600"
+        >
+          <div class="relative w-full flex flex-row">
+            <div class="flex lg:w-20 lg:pt-10 pt-3 items-center flex-col">
+              <button (click)="incVote()" ><img class="h-6 w-6  rotate-180" src="https://filebox-1-x3824723.deta.app/api/embed/877f8664e85fe607" alt=""></button>
+              <p>{{ question.votes.length }}</p>
+              <button (click)="decVote()"><img class="h-6 w-6" src="https://filebox-1-x3824723.deta.app/api/embed/877f8664e85fe607" alt=""></button>
+            </div>
+            <div
+              class="w-full lg:px-5 lg:mt-6 lg:border lg:border-b-blue-400 lg:border-r-blue-400 p-3 rounded-md lg:m-2 lg:shadow-md lg:mr-4"
+            >
+              <p class="lg:text-lg  space-x-1 font-medium">
+                {{ question.description }}
+              </p>
+              <div *ngIf="question.code">
+                <h1 class="text-2xl mt-2 font-semibold">Code :</h1>
+                <p
+                  class="mt-2 p-3 mr-16 left-2 relative right-4 bg-gray-200 rounded-md text-md"
+                >
+                  {{ question.code }}
+                </p>
+              </div>
+              <div class="flex mt-2 flex-row py-2">
+                <div *ngFor="let tag of question.tags">
+                  <app-tag [tag]="tag"></app-tag>
+                </div>
+              </div>
+              <div>
+                <p class="text-md">
+                  {{ question.expectation }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="question.answers.length" class="w-full p-2">
+            <h1 class="text-3xl font-bold lg:ml-16 lg:mt-4">Answer</h1>
+            <div
+              *ngFor="let ans of question.answers"
+              class="lg:ml-20 p-4 border flex flex-col lg:border-b-gray-600 shadow-xl my-1 lg:border-r-gray-600 rounded-md lg:m-2 right-0 lg:mt-4"
+            >
+              <p class="lg:text-lg text-md space-x-1 font-normal">
+                {{ ans.description }}
+              </p>
+              <p
+                class="mt-2 lg:mr-16 left-1 py-1 lg:py-2 px-3 relative right-4 bg-gray-200 rounded-md text-lg overflow-x-scroll"
+              >
+                {{ ans.code }}
+              </p>
+              <button
+                (click)="navTo('dashboard/' + ans.userId)"
+                class="self-end lg:mr-14 mt-2 cursor-pointer outline-none"
+              >
+                {{ ans.userName }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <!-- <h1>kjbdsaiub</h1> -->
+        </div>
+      </div>
+      <div class="ml-4 mt-8 w-full pr-4">
+        <div
+          class="border-b-blue-600 shadow-xl border-r-blue-600 p-5 rounded-md"
+        >
+          <h1 class="text-2xl mb-2 font-bold">Share Your Answer</h1>
+          <div>
+            <h2 class="font-medium">Describe the solution</h2>
+            <textarea
+              id="description"
+              [(ngModel)]="answer.description"
+              class="w-full mt-2 rounded-sm outline-none border-2 border-blue-600 p-4 text-md"
+              name="body"
+              rows="5"
+            ></textarea>
+            <div *ngIf="descriptionValid" class="alert">
+              <div class="text-red-500 text-sm">Body is required...</div>
+            </div>
+          </div>
+          <div>
+            <h2 class="font-medium">Share you code if available</h2>
+            <textarea
+              id="description"
+              [(ngModel)]="answer.code"
+              class="w-full mt-2 rounded-sm outline-none border-2 border-blue-600 p-4 text-md"
+              name="body"
+              rows="5"
+            ></textarea>
+          </div>
+          <button
+            class="bg-blue-600 py-2 text-aliceblue rounded-lg px-5 my-3 text-xl font-semibold"
+            (click)="postAnswer()"
+          >
+            Post Answer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

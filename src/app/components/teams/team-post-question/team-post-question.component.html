@@ -1,0 +1,254 @@
+<div>
+  <div class="relative mt-14">
+    <app-navbar></app-navbar>
+  </div>
+  <div
+    class="lg:absolute lg:left-60 lg:right-4 flex flex-col p-4 mt-14 lg:mb-20"
+  >
+    <div class="flex w-full felx-row justify-between">
+      <h1 class="lg:pt-8 pb-2 text-2xl lg:text-3xl font-bold">
+        Post Your Question
+      </h1>
+    </div>
+    <div
+      class="bg-blue-100 mt-2 border rounded-md px-4 py-1 lg:p-4 text-md lg:text-xl border-blue-500 w-full lg:w-2/3"
+    >
+      <p>Please do a final review of your question and then post.</p>
+    </div>
+    <div class="flex lg:flex-row flex-col-reverse mt-2">
+      <div class="lg:w-2/3 w-full">
+        <div class="lg:border my-2 rounded-sm lg:p-8 pb-0 lg:border-blue-500">
+          <h1 class="lg:text-xl text-lg rounded-md text-blue-600 font-bold">
+            Title
+          </h1>
+          <p class="text-sm lg:text-lg">
+            Be specific and imagine you're asking a question to another person.
+          </p>
+          <input
+            (keyup)="toggleValid('title')"
+            id="title"
+            [(ngModel)]="question.title"
+            name="title"
+            class="lg:p-2 pb-1 text-sm lg:text-md px-2 rounded-sm outline-none border-2 border-blue-600 mt-3 text-black w-full"
+            placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+            type="text"
+          />
+          <div *ngIf="titleExist" class="alert">
+            <div
+              class="text-red-500 text-sm"
+              *ngIf="question.title.length < 10"
+            >
+              Question is required.
+            </div>
+            <div
+              class="text-red-500 text-sm"
+              *ngIf="question.title.length > 10"
+            >
+              This question already exits
+            </div>
+          </div>
+        </div>
+        <div class="lg:border lg:my-2 rounded-sm lg:p-8 lg:border-blue-500">
+          <h1 class="lg:text-xl text-lg text-blue-600 font-bold">
+            What are the details of your problem?
+          </h1>
+          <p class="text-sm lg:text-lg">
+            Introduce the problem and expand on what you put in the title.
+            Minimum 20 characters.
+          </p>
+          <textarea
+            id="description"
+            name="description"
+            [(ngModel)]="question.description"
+            class="w-full text-sm lg:text-md rounded-sm mt-2 outline-none border-2 border-blue-600 p-4 text-md"
+            rows="8"
+          ></textarea>
+          <div *ngIf="descriptionValid" class="alert">
+            <div
+              class="text-red-500 text-sm"
+              *ngIf="question.description.length <= 19"
+            >
+              Description must be at least 19 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="lg:border lg:my-2 rounded-sm lg:p-8 lg:border-blue-500">
+          <h1 class="lg:text-xl text-lg text-blue-600 font-bold">Code</h1>
+          <p class="text-sm lg:text-lg">Paste your code here...</p>
+          <textarea
+            id="code"
+            name="code"
+            [(ngModel)]="question.code"
+            class="w-full rounded-sm mt-2 outline-none border-2 border-blue-600 p-4 text-md"
+            rows="8"
+          ></textarea>
+          <div *ngIf="codeValid" class="alert">
+            <div
+              class="text-red-500 text-sm"
+              *ngIf="question.code.length <= 10"
+            >
+              Paste your code here buddy...
+            </div>
+          </div>
+        </div>
+        <div class="lg:border lg:my-2 rounded-sm lg:p-8 lg:border-blue-500">
+          <h1 class="lg:text-xl text-lg text-blue-600 font-bold">
+            What did you try and what were you expecting?
+          </h1>
+          <p class="text-sm lg:text-lg">
+            Describe what you tried, what you expected to happen, and what
+            actually resulted. Minimum 20 characters.
+          </p>
+          <textarea
+            id="expectation"
+            [(ngModel)]="question.expectation"
+            class="w-full mt-2 rounded-sm outline-none border-2 border-blue-600 p-4 text-md"
+            name="body"
+            rows="5"
+          ></textarea>
+        </div>
+        <div class="lg:border lg:my-2 rounded-sm lg:p-8 lg:border-blue-500">
+          <h1 class="lg:text-xl text-lg text-blue-600 font-bold">Tags</h1>
+          <p class="text-sm lg:text-lg">
+            Add up to 5 tags to describe what your question is about. Start
+            typing to see suggestions.
+          </p>
+          <!-- ()="topTagsF()" -->
+          <input
+            id="tags"
+            [(ngModel)]="tag"
+            (keyup)="searchTags()"
+            class="lg:p-2 px-2 py-1 outline-none border-2 border-blue-600 mt-3 text-black w-full"
+            placeholder="e.g. (database arrays python-3.x)"
+            type="text"
+          />
+          <div *ngIf="tagsValid" class="alert">
+            <div class="text-red-500 text-sm" *ngIf="question.tags.length == 0">
+              Aleast one tag is required...
+            </div>
+            <div class="text-red-500 text-sm" *ngIf="question.tags.length == 5">
+              Already you added 5 tags...
+            </div>
+          </div>
+          <div
+            class="bg-aliceblue mt-2 z-10 w-4/5 grid gap-2 p-2 rounded-md lg:grid-cols-5"
+            *ngIf="question.tags.length > 0"
+          >
+            <div
+              class="bg-blue-500 flex justify-between rounded-sm p-1 text-aliceblue font-semibold px-3"
+              *ngFor="let object of question.tags"
+            >
+              <p>{{ object }}</p>
+              <p
+                (click)="removeTag(object)"
+                class="text-blue-100 cursor-pointer"
+              >
+                X
+              </p>
+            </div>
+          </div>
+          <div
+            class="absolute bg-aliceblue mt-2 ml-[4px] lg:ml-0 z-10 w-4/5 lg:w-2/5 grid gap-2 border border-blue-600 p-2 rounded-md grid-cols-2 lg:grid-cols-4"
+            *ngIf="topTags.length > 0"
+          >
+            <div
+              (click)="selectTags(object)"
+              class="border border-blue-600 p-1 rounded-sm font-semibold px-3"
+              *ngFor="let object of topTags"
+            >
+              <p>{{ object }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="border my-2 rounded-sm lg:p-8 px-3 py-1 border-blue-500">
+          <h1 class="lg:text-xl text-md text-blue-600 font-bold">
+            Review questions already on Stack Overflow to see if your question
+            is a duplicate.
+          </h1>
+          <p class="text-sm lg:text-lg">
+            Clicking on these questions will open them in a new tab for you to
+            review. Your progress here will be saved so you can come back and
+            continue.
+          </p>
+          <div>
+            <div
+              *ngIf="!reviewToggle"
+              class="border-2 border-r-slate-900 border-b-slate-900"
+            >
+              <div
+                (click)="toggler()"
+                class="flex justify-between px-5 border border-b-slate-900 py-2"
+              >
+                <p>Do any of these posts answer your question?</p>
+                <p *ngIf="!toggle" class="text-xl cursor-pointer">^</p>
+                <p *ngIf="toggle" class="cursor-pointer">v</p>
+              </div>
+              <div class="p-2" *ngIf="!toggle">
+                <div
+                  *ngIf="!this.service.copyQuestion?.length"
+                  class="flex justify-center transition-transform ease-linear"
+                >
+                  <p>No duplicate questions found.</p>
+                </div>
+                <div
+                  class="grid gap-2"
+                  *ngIf="this.service.copyQuestion?.length"
+                >
+                  <div *ngFor="let question of this.service.copyQuestion">
+                    <app-team-question-card
+                      [question]="question"
+                    ></app-team-question-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="reviewToggle">
+              <button
+                class="bg-blue-600 py-1 px-4 lg:px-8 rounded-sm font-semibold text-aliceblue my-1"
+                (click)="reviewQuestion()"
+              >
+                Review If Already Exist
+              </button>
+            </div>
+          </div>
+          <div
+            class="lg:p-3 lg:my-2 lg:border border-r-gray-800 lg:border-b-gray-800"
+            *ngIf="this.service.copyQuestion?.length"
+          >
+            <h1>
+              Confirm that none of these existing posts on Stack Overflow
+              answers your question.
+            </h1>
+            <div class="lg:bg-gray-300 rounded-sm py-1 px-2 lg:px-3 flex">
+              <input [(ngModel)]="copyChecker" required type="checkbox" />
+              <p class="lg:ml-4 ml-2 text-black text-sm lg:text-md">
+                I confirm that none of these posts answers my question.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5">
+          <button
+            class="bg-blue-600 py-1 px-8 rounded-sm font-semibold text-aliceblue"
+            (click)="postQuestion()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+      <div class="lg:w-1/3 lg:h-80 py-3 lg:px-8">
+        <div class="border rounded-md border-blue-700 shadow-lg">
+          <h1
+            class="border rounded-t-md text-blue-800 font-semibold px-4 py-2 border-b-blue-500"
+          >
+            Make sure we don't already have an answer for your question
+          </h1>
+          <p class="px-3 py-2">
+            Please make sure your question isn't already answered before
+            posting, or your question might be closed as a duplicate.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

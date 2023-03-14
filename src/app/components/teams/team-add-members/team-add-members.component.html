@@ -1,0 +1,39 @@
+<div
+  class="absolute mx-3 z-10 lg:left-60 rounded-md w-[90%] lg:min-h-[650px] bg-blue-200 lg:right-4 p-4 flex flex-col py-4 mt-4"
+>
+<div class="flex flex-row justify-between">
+  <h1 class="text-2xl mb-3 font-bold">Users</h1>
+  <button (click)="closeAddMember()" class="px-4 font-bold rounded-sm h-7 bg-blue-300" >Close</button>
+</div>
+  <div
+    class="bg-aliceblue p-1 border border-black lg:mt-8 flex rounded-lg px-2 lg:w-96"
+  >
+    <fa-icon class="h-6" icon="magnifying-glass"></fa-icon>
+    <input
+      (keyup)="searchUser()"
+      [(ngModel)]="nameQuery"
+      class="bg-aliceblue  w-full ml-2 lg:ml-3 text-sm lg:text-lg outline-none"
+      type="text"
+      placeholder="search..."
+    />
+  </div>
+  <div class="grid text-blue-900 mt-3 lg:my-3  lg:grid-cols-3">
+    <div
+      (click)="addMember(user)"
+      *ngFor="let user of users"
+      class="m-2  lg:h-28 flex hover:shadow-lg flex-row bg-aliceblue cursor-pointer rounded-md border-2 border-blue-200 justify-start p-3 border"
+    >
+      <div class="lg:w-20 h-12 w-12 lg:h-20 bg-blue-300 mr-2">
+        <img  src={{user.photoURL}} alt="" />
+      </div>
+      <div class="flex flex-col justify-between">
+        <div>
+          <p class="cursor-pointer">
+            {{ user.userName }}
+          </p>
+          <p title="reputations">0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

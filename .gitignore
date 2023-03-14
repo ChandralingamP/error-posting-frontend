@@ -1,0 +1,11 @@
+node_modules
+android
+capacitor.config.ts
+.dockerignore
+dockerfile
+Spacefile
+.space
+android
+.vscode
+.angular
+dist
