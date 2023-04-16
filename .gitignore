@@ -1,3 +1,4 @@
+node_modules
 android
 capacitor.config.ts
 .dockerignore
@@ -8,3 +9,4 @@ android
 .vscode
 .angular
 dist
+node_modules
