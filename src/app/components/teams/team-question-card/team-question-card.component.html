@@ -5,7 +5,7 @@
     <p *ngIf="question.answers">{{question.answers.length}} answers</p>
   </div>
   <div class="flex flex-col w-full lg:mb-8">
-    <p (click)="navTo('answers/'+question._id)" class="lg:text-xl pl-1  text-md cursor-pointer font-semibold mb-1"> {{question.title}}</p>
+    <p (click)="navTo(question._id)" class="lg:text-xl pl-1  text-md cursor-pointer font-semibold mb-1"> {{question.title}}</p>
     <div class="flex w-full items-center flex-col lg:flex-row justify-between">
       <div class="w-full flex-wrap flex">
         <div *ngFor="let tag of question.tags">

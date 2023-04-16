@@ -40,12 +40,11 @@ export class TeamAddMembersComponent {
         }
         if(this.teamId){
           // console.log(this.teamId,this.member);
+          this.teamService.members.push(this.member);
           this.teamService.addMember(this.teamId,this.member);
         }
       }
     }
-
-
   }
   closeAddMember(){
     this.teamService.addMemberToggle = false;
